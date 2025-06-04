@@ -8,6 +8,12 @@ import { ConfigService } from '@nestjs/config';
       useFactory: (configService: ConfigService) => ({
         synchronize: true,
         type: 'postgres',
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
         host: configService.get('database.host'),
         port: configService.get<number>('database.port'),
         username: configService.get('database.username'),
