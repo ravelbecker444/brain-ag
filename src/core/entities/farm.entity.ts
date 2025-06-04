@@ -38,10 +38,13 @@ export class Farm extends AgBaseEntity {
   })
   vegetationAreaHectares: number;
 
-  @ManyToOne(() => Producer, (producer) => producer.farms)
+  @ManyToOne(() => Producer, (producer) => producer.farms, {
+    onDelete: 'CASCADE',
+  })
   producer: Producer;
 
   @OneToMany(() => Crop, (crop) => crop.farm, {
+    onDelete: 'CASCADE',
     cascade: true,
   })
   crops: Crop[];
